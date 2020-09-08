@@ -6,16 +6,16 @@ It needs admin user privilages
 You can either use Token or use your username and password
 To use Token add token in the user prompt and leave password field empty
 '''
-
+import sys
 import requests
 from requests.exceptions import HTTPError
-from getpass import getpass
+
 
 # TOKEN = "d736a9c5368d4d3906505655191a403cb08bbee2"
-SONARQUBE_QUALITYGATE_API = input("SonarQube URL like http://localhost:9000: ")+"/api/qualitygates"
-USER = input('User: ')
-PASS = getpass()
-QUALITY_GATE_NAME = input("Quality Gate Name: ")
+SONARQUBE_QUALITYGATE_API = sys.argv[0] + "/api/qualitygates"
+USER = sys.argv[1]
+PASS = sys.argv[2]
+QUALITY_GATE_NAME = sys.argv[3]
 
 CONDITIONS = {
     0: ["coverage", "LT", "100"],

@@ -5,8 +5,9 @@ pipeline {
 		  steps {
 				withSonarQubeEnv('SonarQube') {
                                    sh 'env'
-				   // sh 'pip3 install -r requirements.txt'
-				   // sh 'python3 test.py'
+				   sh 'chmod +x test.py'
+				   sh 'sudo pip3 install -r requirements.txt'
+				   sh 'python3 test.py'
 				}
 			}
        }

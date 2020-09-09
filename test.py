@@ -8,13 +8,16 @@ To use Token add token in the user prompt and leave password field empty
 '''
 
 import os
+import json
 import requests
 from requests.exceptions import HTTPError
 from getpass import getpass
-
-TOKEN = os.environ['SONAR_AUTH_TOKEN']
+sonarqubeConfig = json.loads(os.environ['SONARQUBE_SCANNER_PARAMS'])
+TOKEN = sonarqubeConfig['sonar.login']
+#os.environ['SONAR_AUTH_TOKEN']
 # should be replaced by sonarqube Jenking configuration's fields/variables
-SONARQUBE_URL = os.environ['SONAR_HOST_URL']
+SONARQUBE_URL = sonarqubeConfig['sonar.host.url']
+#os.environ['SONAR_HOST_URL']
 #input("SonarQube URL like http://localhost:9000: ")
 SONARQUBE_QUALITYGATE_API = SONARQUBE_URL+"/api/qualitygates"
 SONARQUBE_QUALITYPROFILE_API = SONARQUBE_URL+"/api/qualityprofiles"
@@ -22,12 +25,12 @@ SONARQUBE_QUALITYPROFILE_API = SONARQUBE_URL+"/api/qualityprofiles"
 #USER = input('User: ')
 #PASS = getpass()
 # The new name of QG of on-boarding team. Should 'Lean SDLC_<TeamName>'
-QUALITY_GATE_NAME = "Lean SDLC_HITT_EXTENDED_New2"
+QUALITY_GATE_NAME = "Lean SDLC_HITT_EXTENDED_New3"
 #input("Quality Gate Name: ")
 # Default Name of Sonar plus Mutation Quality Profile created by HITT as the DEFAULT
 QUALITY_PROFILE_NAME_FROM = "Sonar+Mutation" 
 # The new name of profile on-boarding team wants. Should HITT the DEFAULT + _<TeamName>
-QUALITY_PROFILE_NAME_TO = "Sonar+Mutation_HITT_EXTENDED_New2"
+QUALITY_PROFILE_NAME_TO = "Sonar+Mutation_HITT_EXTENDED_New3"
 
 CONDITIONS = {
     0: ["coverage", "LT", "100"],
